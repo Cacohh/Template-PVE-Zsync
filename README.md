@@ -19,72 +19,40 @@ pip3 install cron-descriptor
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be teste
+Clone the repositorie to your machine, and enter in it. And after that, create a scripts folder in your zabbix-agent configuration folder. (Default: /etc/zabbix/)
 
 ```
-Give the example
+mkdir /etc/zabbix/scripts
 ```
 
-And repeat
+Then, copy the scripts to te folder.
 
 ```
-until finished
+cp ./Template-PVE-Zsync/scripts/* /etc/zabbix/scripts
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Copy the userparameter file to the zabbix_agentd.d folder.
 
 ```
-Give an example
+cp ./Template-PVE-Zsync/userparameter_pve_zsync.conf /etc/zabbix/zabbix_agentd.d/
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
+Restart the zabbix-agent in your system. (The example below is made with Proxmox 6.x)
 
 ```
-Give an example
+/etc/init.d/zabbix-agent restart
 ```
 
-## Deployment
+After that, import the template file "template_pve_zsync.xml" in your zabbix server frontend, and see your recent data coming.
 
-Add additional notes about how to deploy this on a live system
+## Details about Deployment
+
+The discovery item in the template receive a argument, that can be 4.0 or 4.2 (For >= 4.2. Default 4.2). Adjust accordly with your zabbix server version. 
+The NextRun and PreviousRun item is disabled for default. Active if you want to. 
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+* [Zabbix 4.2](https://www.zabbix.com/documentation/4.2/manual) - The IT monitoring tool 
+* [Python 3](https://www.python.org/) - A nice language to programming
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* **Caio Jorge** - *Initial work* - [Cacohh](https://github.com/Cacohh/)
