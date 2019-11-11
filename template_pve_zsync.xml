@@ -259,7 +259,7 @@ Date: 30/09/2019</description>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>pvezsync.NextRun[#SOURCE]</key>
+                            <key>pvezsync.NextRun[{#SOURCE}]</key>
                             <delay>45m</delay>
                             <history>90d</history>
                             <trends>0</trends>
