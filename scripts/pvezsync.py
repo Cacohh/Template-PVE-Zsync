@@ -9,7 +9,7 @@ def accessCrontab(filePath):
 def pvezsyncJobState(job):
     import subprocess
     command = str("l=$(pve-zsync list | grep " + str(
-        job) + " | tr -s ' ' ',' | cut -d, -f 3 ); if [ $l == 'ok' ]; then echo 0; elif [ $l == 'syncing' ]; then echo 1; elif [ $l == 'stopped' ]; then echo 2; elif [ $l == 'error' ]; then echo 3; else echo 4; fi;")
+        job) + " | tr -s ' ' ',' | cut -d, -f 3 ); if [ $l == 'ok' ]; then echo 0; elif [ $l == 'syncing' ]; then echo 1; elif [ $l == 'stopped' ]; then echo 2; elif [ $l == 'error' ]; then echo 3; elif [ $l == 'waiting' ]; then echo 4;  else echo 5; fi;")
     data = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
     stdout, stderr = data.communicate()
     return stdout.decode('utf-8')

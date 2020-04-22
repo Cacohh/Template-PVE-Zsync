@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.2</version>
-    <date>2019-11-07T18:49:56Z</date>
+    <version>4.4</version>
+    <date>2020-04-22T17:04:18Z</date>
     <groups>
         <group>
             <name>Template pve-zsync</name>
@@ -26,491 +26,163 @@ Date: 30/09/2019</description>
                     <name>PVE-Zsync</name>
                 </application>
             </applications>
-            <items/>
             <discovery_rules>
                 <discovery_rule>
                     <name>PVE Zsync tasks discovery</name>
-                    <type>7</type>
-                    <snmp_community/>
-                    <snmp_oid/>
+                    <type>ZABBIX_ACTIVE</type>
                     <key>pvezsync.discoveryJobs[4.2]</key>
                     <delay>1h</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
-                        <conditions/>
-                    </filter>
-                    <lifetime>30d</lifetime>
+                    <lifetime>3d</lifetime>
                     <description>Discovery of replications tasks from pve-zsync tool. Items are Zabbix active, and more secure when used with encryption.</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>Replication Task Scheduled Description of {#NAME} in {#SOURCE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>pvezsync.JobDescriptor[{#SOURCE}]</key>
                             <delay>45m</delay>
-                            <history>90d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>1</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
+                            <value_type>CHAR</value_type>
                             <description>Shows the scheduled description from pve-zsync command for this job replication.</description>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>PVE-Zsync</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PVE-Task-Descriptor</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item/>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{change()}=1</expression>
+                                    <name>Replication task Scheduled {#NAME}  on {#SOURCE} changed</name>
+                                    <priority>INFO</priority>
+                                    <description>Shows when the scheduled for the replication task changes.</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Replication Task Max Snapshots of {#NAME} in {#SOURCE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>pvezsync.JobMaxSnap[{#SOURCE}]</key>
                             <delay>45m</delay>
-                            <history>90d</history>
-                            <trends>365d</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
                             <units>Snaps</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>Shows the value of Maxsnaps parameter of pve-zsync command/</description>
-                            <inventory_link>0</inventory_link>
+                            <description>Shows the value of Maxsnaps parameter of pve-zsync command.</description>
                             <applications>
                                 <application>
                                     <name>PVE-Zsync</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PVE-Task-MaxSnapshots</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item/>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{diff()}=1</expression>
+                                    <name>Replication task Max Snapshots {#NAME}  on {#SOURCE} changed</name>
+                                    <priority>INFO</priority>
+                                    <description>Shows when replication task changed in pve-zsync command.</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Replication Task State of {#NAME} in {#SOURCE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>pvezsync.Jobstate[{#SOURCE}]</key>
                             <delay>45m</delay>
-                            <history>90d</history>
-                            <trends>365d</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
                             <description>Shows the state of the last run of replication from pve-zsync command.</description>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>PVE-Zsync</name>
                                 </application>
                             </applications>
-                            <valuemap>
-                                <name>PVE Zsync Replication Task State Map</name>
-                            </valuemap>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PVE-Task-State</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item/>
+                            <valuemap>
+                                <name>PVE Zsync Replication Task State Map</name>
+                            </valuemap>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=5</expression>
+                                    <name>Replication task {#NAME}  on {#SOURCE} has a unknown error</name>
+                                    <priority>HIGH</priority>
+                                    <description>Shows when a replication task from pve-zsync has a unknown error.</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=3</expression>
+                                    <name>Replication task {#NAME}  on {#SOURCE} is in error</name>
+                                    <priority>HIGH</priority>
+                                    <description>Alert when a replication task from pve-zsync command fails.</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=2</expression>
+                                    <name>Replication task {#NAME}  on {#SOURCE} is stopped</name>
+                                    <priority>WARNING</priority>
+                                    <description>Shows when a replication task in pve-zsync is stopped.</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>Replication task {#NAME}  on {#SOURCE} is syncing</name>
+                                    <priority>INFO</priority>
+                                    <description>Shows when replication task from pve-zsync is syncing.</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=4</expression>
+                                    <name>Replication task {#NAME}  on {#SOURCE} is waiting</name>
+                                    <priority>HIGH</priority>
+                                    <description>Shows when a replication task from pve-zsync has a unknown error.</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Replication Task Next Run of {#NAME} in {#SOURCE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>pvezsync.NextRun[{#SOURCE}]</key>
                             <delay>45m</delay>
-                            <history>90d</history>
                             <trends>0</trends>
-                            <status>1</status>
-                            <value_type>1</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
+                            <status>DISABLED</status>
+                            <value_type>CHAR</value_type>
                             <description>Shows the next run of this replication job from pve-zsync scheduled.</description>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>PVE-Zsync</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PVE-Task-NextRun</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>Replication Task Previous Run of {#NAME} in {#SOURCE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>pvezsync.PreviousRun[{#SOURCE}]</key>
                             <delay>45m</delay>
-                            <history>90d</history>
                             <trends>0</trends>
-                            <status>1</status>
-                            <value_type>1</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
+                            <status>DISABLED</status>
+                            <value_type>CHAR</value_type>
                             <description>Shows the previous run of this replication job from pve-zsync scheduled.</description>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>PVE-Zsync</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PVE-Task-PreviousRun</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Template PVE Zsync Active:pvezsync.JobMaxSnap[{#SOURCE}].diff()}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Replication task Max Snapshots {#NAME}  on {#SOURCE} changed</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>1</priority>
-                            <description>Shows when replication task changed in pve-zsync command.</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template PVE Zsync Active:pvezsync.JobDescriptor[{#SOURCE}].change()}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Replication task Scheduled {#NAME}  on {#SOURCE} changed</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>1</priority>
-                            <description>Shows when the scheduled for the replication task changes.</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template PVE Zsync Active:pvezsync.Jobstate[{#SOURCE}].last()}=4</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Replication task {#NAME}  on {#SOURCE} has a unknown error</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description>Shows when a replication task from pve-zsync has a unknown error.</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template PVE Zsync Active:pvezsync.Jobstate[{#SOURCE}].last()}=3</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Replication task {#NAME}  on {#SOURCE} is in error</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description>Alert when a replication task from pve-zsync command fails.</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template PVE Zsync Active:pvezsync.Jobstate[{#SOURCE}].last()}=2</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Replication task {#NAME}  on {#SOURCE} is stopped</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description>Shows when a replication task in pve-zsync is stopped.</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template PVE Zsync Active:pvezsync.Jobstate[{#SOURCE}].last()}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Replication task {#NAME}  on {#SOURCE} is syncing</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>1</priority>
-                            <description>Shows when replication task from pve-zsync is syncing.</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
-                    <graph_prototypes/>
-                    <host_prototypes/>
-                    <jmx_endpoint/>
-                    <timeout>3s</timeout>
-                    <url/>
-                    <query_fields/>
-                    <posts/>
-                    <status_codes>200</status_codes>
-                    <follow_redirects>1</follow_redirects>
-                    <post_type>0</post_type>
-                    <http_proxy/>
-                    <headers/>
-                    <retrieve_mode>0</retrieve_mode>
-                    <request_method>0</request_method>
-                    <allow_traps>0</allow_traps>
-                    <ssl_cert_file/>
-                    <ssl_key_file/>
-                    <ssl_key_password/>
-                    <verify_peer>0</verify_peer>
-                    <verify_host>0</verify_host>
-                    <lld_macro_paths/>
-                    <preprocessing/>
-                    <master_item/>
                 </discovery_rule>
             </discovery_rules>
-            <httptests/>
-            <macros/>
-            <templates/>
-            <screens/>
-            <tags/>
         </template>
     </templates>
     <value_maps>
